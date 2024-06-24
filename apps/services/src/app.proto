@@ -1,0 +1,11 @@
+syntax = "proto3";
+package services;
+
+// Package Services
+
+service ServicesService { rpc GetHello(Data) returns (Result); }
+
+// Common Messages
+
+message Data { string value = 1; }
+message Result { string value = 1; }
