@@ -5,5 +5,9 @@ export interface ServicesService {
   getHello: (
     data: { value: string },
     meta?: Metadata,
-  ) => Observable<{ value: string }>;
+  ) => Observable<{
+    metadata: Metadata;
+    message: { value: string };
+    status: { code: number; details: string };
+  }>;
 }

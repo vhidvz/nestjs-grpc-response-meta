@@ -13,11 +13,14 @@ export class AppService {
     const meta = new Metadata();
     meta.set('key', 'value');
 
-    const result = await lastValueFrom(
+    const { status, message, metadata } = await lastValueFrom(
       this.services.getHello({ value: 'Hello World!' }, meta),
     );
 
-    return result.value;
+    console.log('status', status);
+    console.log('metadata', metadata.getMap());
+
+    return message.value;
   }
 
   get services() {
