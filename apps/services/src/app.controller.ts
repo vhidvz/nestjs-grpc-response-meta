@@ -14,8 +14,9 @@ export class AppController {
     @Meta() meta: Metadata,
     @Write() write: ServerWritableStream<any, any>,
   ) {
+    console.log('meta', meta.getMap());
     meta.set('vahid', 'vakili');
     write.sendMetadata(meta);
-    return this.appService.getHello(meta);
+    return this.appService.getHello();
   }
 }
