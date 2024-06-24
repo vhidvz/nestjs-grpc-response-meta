@@ -1,6 +1,6 @@
 import { GrpcMethod, GrpcService } from '@nestjs/microservices';
-import { Meta } from '@app/common/decorators';
-import { Metadata } from '@grpc/grpc-js';
+import { Metadata, ServerWritableStream } from '@grpc/grpc-js';
+import { Meta, Write } from '@app/common/decorators';
 import { APP } from '@app/common/consts';
 
 import { AppService } from './app.service';
@@ -10,7 +10,12 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @GrpcMethod(APP.SERVICE.NAME)
-  getHello(@Meta() meta: Metadata) {
+  getHello(
+    @Meta() meta: Metadata,
+    @Write() write: ServerWritableStream<any, any>,
+  ) {
+    meta.set('vahid', 'vakili');
+    write.sendMetadata(meta);
     return this.appService.getHello(meta);
   }
 }
